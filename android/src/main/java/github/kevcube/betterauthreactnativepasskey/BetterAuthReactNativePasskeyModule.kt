@@ -74,6 +74,7 @@ class BetterAuthReactNativePasskeyModule : Module() {
             autoSelectAllowed = useAutoRegister,
           )
           android.util.Log.d("DEBUG", "===> val request = buildCreatePublicKeyCredentialRequest done")
+          android.util.Log.d("DEBUG", "===> request: + request.toString()")
           val result = credentialManager.createCredential(activity, request)
           android.util.Log.d("DEBUG", "===> credentialManager.createCredential done")
           when (result) {
@@ -96,6 +97,8 @@ class BetterAuthReactNativePasskeyModule : Module() {
           promise.reject("CANCELLED", "User cancelled", e)
         } catch (e: CreateCredentialException) {
           android.util.Log.d("DEBUG", "===> CreateCredentialException")
+          android.util.Log.d("DEBUG", "===> e.stackTrace" + e.stackTrace)
+          
           promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
         } catch (e: Exception) {
           android.util.Log.d("DEBUG", "===> Exception")
