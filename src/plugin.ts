@@ -105,6 +105,7 @@ export const getPasskeyActionsNative = (
 		},
 		fetchOpts?: BetterFetchOption,
 	) => {
+		console.log("===> registerPasskey test 2");
 		const optionsRes = await $fetch<PublicKeyCredentialCreationOptionsJSON>(
 			"/passkey/generate-register-options",
 			{
@@ -119,12 +120,15 @@ export const getPasskeyActionsNative = (
 		);
 
 		if (!optionsRes.data) return optionsRes;
+		console.log("===> before attestation test 2");
 
 		try {
 			const attestation = await PasskeyModule.registerPasskey({
 				optionsJSON: optionsRes.data,
 				useAutoRegister: opts?.useAutoRegister,
 			});
+
+			console.log("===> attestation test 2");
 
 			const verified = await $fetch<{ passkey: Passkey }>(
 				"/passkey/verify-registration",
@@ -138,10 +142,12 @@ export const getPasskeyActionsNative = (
 					method: "POST",
 				},
 			);
+			console.log("===> verified test 2", verified);
 			if (!verified.data) return verified;
 			$listPasskeys.set(Math.random());
 			return;
 		} catch (e) {
+			console.log("===> Passkey registration error", e);
 			console.error("Passkey registration error:", e);
 			return {
 				data: null,

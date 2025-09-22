@@ -66,14 +66,16 @@ class BetterAuthReactNativePasskeyModule : Module() {
       CoroutineScope(Dispatchers.Main).launch {
         try {
           val credentialManager = CredentialManager.create(activity)
+          android.util.Log.d("DEBUG", "===> CredentialManager.create(activity) done")
           val request = buildCreatePublicKeyCredentialRequest(
             optionsJson = optionsJson,
             origin = originForRequest,
             preferImmediatelyAvailable = useAutoRegister,
             autoSelectAllowed = useAutoRegister,
           )
+          android.util.Log.d("DEBUG", "===> val request = buildCreatePublicKeyCredentialRequest done")
           val result = credentialManager.createCredential(activity, request)
-
+          android.util.Log.d("DEBUG", "===> credentialManager.createCredential done")
           when (result) {
             is CreatePublicKeyCredentialResponse -> {
               val response = JSONObject(result.registrationResponseJson)
@@ -202,6 +204,7 @@ private fun buildCreatePublicKeyCredentialRequest(
       autoSelectAllowed,
     )
   } catch (_: SecurityException) {
+    android.util.Log.d("DEBUG", "===> buildCreatePublicKeyCredentialRequest catch loop")
     CreatePublicKeyCredentialRequest(
       optionsJson,
       null,
