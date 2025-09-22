@@ -42,6 +42,7 @@ class BetterAuthReactNativePasskeyModule : Module() {
           return@AsyncFunction
         }
       }
+      android.util.Log.d("DEBUG", "===> " + optionsJsonObject.toString())
 
       // Ensure the system dialog shows the passkey nickname (user.name) even if displayName is static
       optionsJsonObject.optJSONObject("user")?.let { userObject ->
@@ -89,10 +90,13 @@ class BetterAuthReactNativePasskeyModule : Module() {
             else -> promise.reject("UNEXPECTED_TYPE", "Unexpected credential type", null)
           }
         } catch (e: CreateCredentialCancellationException) {
+          android.util.Log.d("DEBUG", "===> CreateCredentialCancellationException")
           promise.reject("CANCELLED", "User cancelled", e)
         } catch (e: CreateCredentialException) {
+          android.util.Log.d("DEBUG", "===> CreateCredentialException")
           promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
         } catch (e: Exception) {
+          android.util.Log.d("DEBUG", "===> Exception")
           promise.reject("UNKNOWN_ERROR", e.message ?: "Unknown error", e)
         }
       }
