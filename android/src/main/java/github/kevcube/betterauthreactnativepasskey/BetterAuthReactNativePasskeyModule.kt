@@ -95,45 +95,9 @@ class BetterAuthReactNativePasskeyModule : Module() {
         } catch (e: CreateCredentialCancellationException) {
           android.util.Log.d("DEBUG", "===> CreateCredentialCancellationException")
           promise.reject("CANCELLED", "User cancelled", e)
-        } catch (e: CreateCredentialCustomException) {
-          android.util.Log.d("DEBUG", "===> CreateCredentialCustomException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
-        } catch (e: CreateCredentialInterruptedException) {
-          android.util.Log.d("DEBUG", "===> CreateCredentialInterruptedException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
-        } catch (e: CreateCredentialCredentialNoCreateOptionException) {
-          android.util.Log.d("DEBUG", "===> CreateCredentialCredentialNoCreateOptionException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
-        } catch (e: CreateCredentialProviderConfigurationException) {
-          android.util.Log.d("DEBUG", "===> CreateCredentialProviderConfigurationException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
-        } catch (e: CreateCredentialUnknownException) {
-          android.util.Log.d("DEBUG", "===> CreateCredentialUnknownException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
-        } catch (e: CreateCredentialUnsupportedException) {
-          android.util.Log.d("DEBUG", "===> CreateCredentialUnsupportedException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
-        } catch (e: CreateCredentialPublicKeyCredentialException) {
-          android.util.Log.d("DEBUG", "===> CreateCredentialPublicKeyCredentialException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
-        } catch (e: CreateRestoreDomException) {
-          android.util.Log.d("DEBUG", "===> CreateRestoreDomException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
-        } catch (e: E2eeUnavailableException) {
-          android.util.Log.d("DEBUG", "===> E2eeUnavailableException")
-          e.stackTrace
-          promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
         } catch (e: CreateCredentialException) {
           android.util.Log.d("DEBUG", "===> CreateCredentialException")
-          android.util.Log.d("DEBUG", "===> e.stackTrace" + e.stackTrace)
+          e.stackTrace
           promise.reject("CREATE_ERROR", e.message ?: "Failed to create passkey", e)
         } catch (e: Exception) {
           android.util.Log.d("DEBUG", "===> Exception")
